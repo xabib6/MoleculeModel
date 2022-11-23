@@ -2,10 +2,11 @@
 
 void Molecule::ShowMoleculeInfo()
 {
-	for (int i = 0; i < _length; i++)
+	cout << "Атомов в молекуле: " << _atomCount << endl;
+	for (int i = 0; i < _atomCount; i++)
 	{
 		atoms[i].ShowAtomInfo();
-		cout << "==============================\n";
+		cout << endl;
 	}
 	cout << "Масса молекулы: " << _mass << endl;
 	cout << "Суммарная энергия: " << _totalEnergy << endl;
@@ -13,13 +14,13 @@ void Molecule::ShowMoleculeInfo()
 
 void Molecule::AddAtom(Atom newAtom)
 {
-	Atom* newAtoms = new Atom[_length + 1];
-	for (int i = 0; i < _length; i++)
+	Atom* newAtoms = new Atom[_atomCount + 1];
+	for (int i = 0; i < _atomCount; i++)
 	{
 		newAtoms[i] = atoms[i];
 	}
-	newAtoms[_length] = newAtom;
-	_length++;
+	newAtoms[_atomCount] = newAtom;
+	_atomCount++;
 
 	_mass += newAtom._mass;
 	_totalEnergy += newAtom._electronShell;
@@ -30,21 +31,21 @@ void Molecule::AddAtom(Atom newAtom)
 
 void Molecule::RemoveAtomAt(int chosenAtom)
 {
-	if (chosenAtom < 1 || chosenAtom > _length)
+	if (chosenAtom < 1 || chosenAtom > _atomCount)
 	{
 		cout << "Выбранного атома не существует! " << endl;
 		return;
 	}	
 
-	Atom* newAtoms = new Atom[_length - 1];
+	Atom* newAtoms = new Atom[_atomCount - 1];
 	int removal = 0;
-	for (int i = 0; i < _length-1; i++)
+	for (int i = 0; i < _atomCount-1; i++)
 	{		
 		if (i == chosenAtom - 1)
 			removal = 1;
 		newAtoms[i] = atoms[i+removal];
 	}	
-	_length--;
+	_atomCount--;
 	_mass -= atoms[chosenAtom-1]._mass;
 	_totalEnergy -= atoms[chosenAtom-1]._electronShell;
 
@@ -54,19 +55,19 @@ void Molecule::RemoveAtomAt(int chosenAtom)
 
 void Molecule::FindSameAtoms()
 {
-	bool* isCounted = new bool[_length];
+	bool* isCounted = new bool[_atomCount];
 
-	for (int i = 0; i < _length; i++)
+	for (int i = 0; i < _atomCount; i++)
 	{
 		isCounted[i] = false;
 	}	
 
-	for (int i = 0; i < _length; i++)
+	for (int i = 0; i < _atomCount; i++)
 	{
 		int sameAtomsCount = 1;
 		if (!isCounted[i])
 		{
-			for (int j = i+1; j < _length; j++)
+			for (int j = i+1; j < _atomCount; j++)
 			{
 				if (atoms[i] == atoms[j] && !isCounted[j])
 				{
@@ -89,7 +90,7 @@ void Molecule::FindSameAtoms()
 
 Molecule::Molecule()
 {
-	_length = 0;
+	_atomCount = 0;
 	_mass = 0;
 	_totalEnergy = 0;
 	atoms = NULL;

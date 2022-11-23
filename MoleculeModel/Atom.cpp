@@ -14,10 +14,10 @@ Atom::Atom()
 	_mass = 0;
 }
 
-Atom::Atom(int neutrons, int protons, int electronShell)
+Atom::Atom(int protons, int neutrons, int electronShell)
 {
-	_neutrons = neutrons;
 	_protons = protons;
+	_neutrons = neutrons;
 	_electronShell = electronShell;
 	_mass = _neutrons + _protons;
 }
