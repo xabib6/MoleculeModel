@@ -3,15 +3,15 @@
 class Molecule
 {
 private:
-	Atom* atoms;
-	int _atomCount;
+	Atom* _atoms;
+	int _atomsCount;
 	int _totalEnergy;
 	int _mass;
-
 public:
 	void ShowMoleculeInfo();
 	void AddAtom(Atom newAtom);
 	void RemoveAtomAt(int chosenAtom);
 	void FindSameAtoms();
 	Molecule();
+	~Molecule();
 };

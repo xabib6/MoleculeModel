@@ -1,14 +1,13 @@
 ﻿#include <iostream>
 #include <string>
 #include "Molecule.h"
-#include "Controller.h"
-
+#include "MoleculeManager.h"
 
 using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	Controller controller;
-	controller.Manager();
+	MoleculeManager manager;
+	manager.Start();
 }
 

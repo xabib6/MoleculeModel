@@ -1,27 +1,25 @@
 #pragma once
 #include "Molecule.h"
-class Controller
+class MoleculeManager
 {
 private:
 	Molecule _molecule;
 public:
-	Controller()
+	MoleculeManager()
 	{
 		_molecule = Molecule();
 	}
-	void Manager()
+	void Start()
 	{
-		Atom atom = Atom(0, 0, 0);
+		Atom atom;
 		char input;
 		while (true)
 		{
 			cout << "=====================================" << endl;
-
 			cout << "Список команд: \n1)Добавить атом. \n2)Показать информацию о молекуле. \n" <<
 				"3)Удалить атом. \n4)Показать одинаковые атомы.  \n5)Удалить все атомы. \n" <<
 				"6)Завершить работу. " << endl;
-
-			cout << "=====================================" << endl << endl;
+			cout << "=====================================" << endl;
 
 			cin >> input;
 			switch (input)
@@ -42,14 +40,16 @@ public:
 				break;
 			case '3':
 				cout << "Какой атом удалить?" << endl;
-				cin >> input;
-				_molecule.RemoveAtomAt(int(input));
+				int chosenAtom;
+				cin >> chosenAtom;
+				_molecule.RemoveAtomAt(chosenAtom);
 				break;
 			case '4':
 				_molecule.FindSameAtoms();
 				break;
 			case '5':
-				_molecule = Molecule();				
+				_molecule = Molecule();	
+				break;
 			case '6':
 				return;
 			default:
@@ -57,7 +57,5 @@ public:
 			}
 
 		}
-	};
-
-	
+	};	
 };
